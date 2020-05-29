@@ -14,6 +14,7 @@ class SignUpPageState extends State<SignUpPage> {
   String email;
   String password;
   String username;
+  String idno;
   final GlobalKey<FormState> formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -54,6 +55,10 @@ class SignUpPageState extends State<SignUpPage> {
             decoration: InputDecoration(labelText: 'Username'),
             
           ),
+          TextFormField(
+            onSaved: (input) => idno = input,
+            decoration: InputDecoration(labelText: 'ID'), 
+          ),
           RaisedButton(
             onPressed:signUp,
             child: Text('Sign up'),
@@ -71,7 +76,7 @@ Future<void> signUp() async{
     try{
     AuthResult user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
     user.user.sendEmailVerification();
-    await DatabaseService(uid:user.user.email).updateUserData(username);
+    await DatabaseService(uid:user.user.email).updateUserData(username,idno);
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
     }catch(e){
       print(e.message);
