@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
+import '../pages/home.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -59,7 +59,7 @@ Future<void> signIn(context) async{
     AuthResult user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
     if (user.user.isEmailVerified){
       
-    // Navigator.push(context, MaterialPageRoute(builder: (context) => Home(email:email)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Home(email:email)));
     
     }
     else{
