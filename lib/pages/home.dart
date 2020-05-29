@@ -8,8 +8,9 @@ class Home extends StatelessWidget {
  
   final String email;
   Home({this.email});
-
+  String sno;
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+    sno = (document['Intrested members']+ 1).toString();
     return ListTile(
       title: Row(
         children: [
@@ -38,9 +39,9 @@ class Home extends StatelessWidget {
               await transaction.get(document.reference);
             await transaction.update(freshSnap.reference, {
               'Intrested members': freshSnap['Intrested members'] + 1,
-            
+               
           });
-          await EventDatabase(uid:email,eventName:document['name']).updateUserData(email);
+          await EventDatabase(uid:email,eventName:document['name'],sno:sno).updateUserData(email,sno);
         });
       },
     );

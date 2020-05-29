@@ -16,12 +16,13 @@ class DatabaseService{
 class EventDatabase{
   final String uid;
   final String eventName;
-  EventDatabase({this.uid, this.eventName});
+  final String sno;
+  EventDatabase({this.uid, this.eventName,this.sno});
   final CollectionReference eventNameCollection = Firestore.instance.collection('Event registered List');
 
-  Future updateUserData(String uid)async{
-    return await eventNameCollection.document(eventName).setData({
-      'uid': uid,
+  Future updateUserData(String uid,String sno)async{
+    return await eventNameCollection.document(eventName).updateData({
+      'uid'+sno: uid,
     });
   }
 
