@@ -25,6 +25,11 @@ class EventDatabase{
       'uid'+sno: uid,
     });
   }
+  Future setUserData(String uid,String sno)async{
+    return await eventNameCollection.document(eventName).setData({
+      'uid'+sno: uid,
+    });
+  }
 
 }
 
